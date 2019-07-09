@@ -31,7 +31,7 @@ test_and_move '/tmp/qpwn/qpwn'     '/pwn/work/qpwn'
 test_and_move '/tmp/qpwn/qlibcdb'  '/pwn/work/qlibcdb'
 test_and_move '/tmp/qpwn/qmisc'    '/pwn/qmisc'
 test_and_move '/tmp/qpwn/test.py'  '/pwn/test.py'
-test_and_move '/tmp/qpwn/.vimrc'   '~/.vimrc'
+#test_and_move '/tmp/qpwn/vimrc'   '~/.vimrc'
 
 printf '%s' "delete /tmp/qpwn..."
 rm -r /tmp/qpwn
