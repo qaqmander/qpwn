@@ -1,43 +1,31 @@
 #!/bin/bash
 
-git clone git@github.com:qaqmander/qpwn.git /tmp/qpwn
+git clone https://github.com/qaqmander/qpwn.git /tmp/qpwn
+ 
+printf '%s' "fix ~/.bashrc: add /pwn/bin to PATH..."
+# TODO: maybe there is some way to change $PATH immediately
+echo '\nexport PATH=$PATH:/pwn/bin' >> $HOME/.bashrc #&& source $HOME/.bashrc
+printf '  %s\n' 'done' 
+echo '[NOTICE] You need to source ~/.bashrc to make it take effect'
 
-echo 'move /tmp/qpwn/bin to /pwn/bin ...'
-if [ -e /pwn/bin ]; then
-    echo 'file exists: /pwn/bin'
-    exit -1
-else
-    mv /tmp/qpwn/bin /pwn/bin
-fi
-echo 'done'
+test_and_move() {
+    src=$1
+    dst=$2
+    printf '%s' "move $src to $dst..."
+    if [ -e $dst ]; then
+        printf '\n%s\n' "file exists: $dst"
+        exit -1
+    else
+        mv $src $dst
+    fi
+    printf '  %s\n' 'done' 
+}
 
-echo 'add /pwn/bin to PATH ...'
-echo 'PATH=$PATH:/pwn/bin' >> $HOME/.bashrc && source $HOME/.bashrc
-echo 'done'
+test_and_move '/tmp/qpwn/bin'     '/pwn/bin'
+test_and_move '/tmp/qpwn/qpwn'    '/pwn/work/qpwn'
+test_and_move '/tmp/qpwn/qlibcdb' '/pwn/work/qlibcdb'
+test_and_move '/tmp/qpwn/misc'    '/pwn/misc'
 
-echo 'move /tmp/qpwn/qpwn to /pwn/work/qpwn'
-if [ -e /pwn/work/qpwn ]; then
-    echo 'file exists: /pwn/work/qpwn'
-    exit -1
-else
-    mv /tmp/qpwn/qpwn /pwn/work/qpwn
-fi
-echo 'done'
-
-echo 'move /tmp/qpwn/qlibcdb to /pwn/work/qlibcdb'
-if [ -e /pwn/work/qlibcdb ]; then
-    echo 'file exists: /pwn/work/qlibcdb'
-    exit -1
-else
-    mv /tmp/qpwn/qlibcdb /pwn/work/qlibcdb
-fi
-echo 'done'
-
-echo 'move /tmp/qpwn/misc to /pwn/misc'
-if [ -e /pwn/misc ]; then
-    echo 'file exists: /pwn/misc'
-    exit -1
-else
-    mv /tmp/qpwn/misc /pwn/misc
-fi
-echo 'done'
+printf '%s' "delete /tmp/qpwn..."
+rm -r /tmp/qpwn
+printf '  %s\n' 'done'

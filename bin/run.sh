@@ -1,7 +1,7 @@
 #!/bin/bash
 
 usage_info="Usage: ./run.sh [-l LIBC_NAME] ELF_NAME [ARG0 ARG1 ...]\n
-              e.g. ./run.sh -l libc.so.6 pwn arg0 arg1 arg2"
+              e.g. ./run.sh -l ./libc.so.6 pwn arg0 arg1 arg2"
 
 while [ -n "$1" ]
 do
