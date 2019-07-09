@@ -4,7 +4,7 @@ git clone https://github.com/qaqmander/qpwn.git /tmp/qpwn
  
 printf '%s' "fix ~/.bashrc: add /pwn/bin to PATH..."
 # TODO: maybe there is some way to change $PATH immediately
-echo '\nexport PATH=$PATH:/qpwn/bin' >> ~/.bashrc #&& source $HOME/.bashrc
+echo '\nexport PATH=$PATH:/qpwn/bin' >> $HOME/.bashrc #&& source $HOME/.bashrc
 printf '  %s\n' 'done' 
 echo '[NOTICE] You need to source ~/.bashrc to make it take effect'
 
@@ -31,7 +31,7 @@ test_and_move '/tmp/qpwn/qpwn'     '/pwn/work/qpwn'
 test_and_move '/tmp/qpwn/qlibcdb'  '/pwn/qlibcdb'
 test_and_move '/tmp/qpwn/qmisc'    '/pwn/qmisc'
 test_and_move '/tmp/qpwn/test.py'  '/pwn/test.py'
-#test_and_move '/tmp/qpwn/vimrc'    '~/.vimrc'
+#test_and_move '/tmp/qpwn/vimrc'    "$HOME/.vimrc"
 
 printf '%s' "delete /tmp/qpwn..."
 rm -r /tmp/qpwn
