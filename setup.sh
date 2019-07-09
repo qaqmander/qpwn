@@ -4,7 +4,7 @@ git clone https://github.com/qaqmander/qpwn.git /tmp/qpwn
  
 printf '%s' "fix ~/.bashrc: add /pwn/bin to PATH..."
 # TODO: maybe there is some way to change $PATH immediately
-echo '\nexport PATH=$PATH:/qpwn/bin' >> $HOME/.bashrc #&& source $HOME/.bashrc
+echo 'export PATH=$PATH:/qpwn/bin' >> $HOME/.bashrc #&& source $HOME/.bashrc
 printf '  %s\n' 'done' 
 echo '[NOTICE] You need to source ~/.bashrc to make it take effect'
 
