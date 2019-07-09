@@ -28,7 +28,7 @@ test_and_move() {
 
 test_and_move '/tmp/qpwn/qbin'     '/pwn/qbin'
 test_and_move '/tmp/qpwn/qpwn'     '/pwn/work/qpwn'
-test_and_move '/tmp/qpwn/qlibcdb'  '/pwn/work/qlibcdb'
+test_and_move '/tmp/qpwn/qlibcdb'  '/pwn/qlibcdb'
 test_and_move '/tmp/qpwn/qmisc'    '/pwn/qmisc'
 test_and_move '/tmp/qpwn/test.py'  '/pwn/test.py'
 #test_and_move '/tmp/qpwn/vimrc'    '~/.vimrc'
