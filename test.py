@@ -2,7 +2,8 @@
 
 from pwn import *
 import qpwn
-context(os='linux', arch='amd64', log_level='debug')
+context(os='linux', log_level='debug')
+context.arch = 'amd64'
 context.terminal = ['tmux', 'splitw', '-h']
 
 if args.INFO:
