@@ -27,7 +27,7 @@ test_and_move() {
 }
 
 test_and_move '/tmp/qpwn/qbin'     '/pwn/qbin'
-test_and_move '/tmp/qpwn/qpwn'     '/pwn/work/qpwn'
+test_and_move '/tmp/qpwn/qpwn'     '/usr/local/lib/python2.7/dist-packages/qpwn'
 test_and_move '/tmp/qpwn/qlibcdb'  '/pwn/qlibcdb'
 test_and_move '/tmp/qpwn/qmisc'    '/pwn/qmisc'
 test_and_move '/tmp/qpwn/test.py'  '/pwn/test.py'
