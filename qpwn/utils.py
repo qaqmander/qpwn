@@ -6,7 +6,7 @@ Some tricks here.
 """
 
 from pwn import *
-import os
+from init import q_globals
 
 def make_alias(p):
     """
@@ -24,6 +24,33 @@ def make_alias(p):
     p.ru = p.recvuntil
     p.i = p.interactive
 
+def gogogo(cmd=''):
+    """
+        make debug easier
+    """
+    args = q_globals['args']
+    p = q_globals['p']
+    if not args.REMOTE:
+        gdb.attach(p, cmd)
+
+def happy(name):
+    """
+        print variable's value with good format
+    """
+    value = q_globals['globals']()[name]
+    assert(type(value) == int)
+    log.success('%s: %s' % (name, hex(value)))
+    eval('log.success(\'{0}: \' + hex({0}))'.format(v))
+
+def bc(addr, c=True):
+    """
+        break and continue
+    """
+    assert(type(addr) == int)
+    cmd = 'b *%s\n' % hex(addr)
+    cmd += 'c\n' if c else ''
+    gogogo(cmd)
+
 '''
 def set_aslr_level(level):
     """
@@ -37,6 +64,7 @@ def set_aslr_level(level):
     log.success('[*] aslr_level = {}'.format(level))
 '''
 
+'''
 def change_ld(binary, ld):
     """
         Change ld used by binary, by change content of section interp
@@ -69,3 +97,4 @@ def change_ld(binary, ld):
     os.chmod(path, 0b111000000)
     log.debug('interp changed from {} to {}'.format(data, ld)) 
     return path
+'''

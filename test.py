@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 
 from pwn import *
-import qpwn
+from qpwn import *
 context(os='linux', log_level='debug')
 context.arch = 'amd64'
 context.terminal = ['tmux', 'splitw', '-h']
@@ -17,15 +17,8 @@ else:
     p = process('./pwn')
     elf = ELF('./pwn')
     # libc = elf.libc
-qpwn.make_alias(p)
-
-code_base = 0x555555554000
-def gogogo(cmd=''):
-    if not args.REMOTE:
-        gdb.attach(p, cmd)
-
-def happy(v):
-    eval('log.success(\'{0}: \' + hex({0}))'.format(v))
+init(p, elf, context, args, globals)
+make_alias(p)
 
 if __name__ == '__main__':
     p.i()
