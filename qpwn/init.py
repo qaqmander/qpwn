@@ -4,17 +4,17 @@
     initialization
 """
 
-from pwn import process, ELF, context, args
+from pwn import tube, ELF, context, args
 
 q_globals = {}
 
 def init(p=None, elf=None, _context=None, _args=None, _globals=None):
-    
+
     def do_check(v, t):
-        assert(type(v) == t)
+        assert(isinstance(p, tube))
 
     if p:
-        do_check(p, process)
+        do_check(p, tube)
         q_globals['p'] = p
 
     if elf:
