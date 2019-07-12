@@ -8,8 +8,8 @@ from pwn import tube, ELF, context, args
 
 q_globals = {}
 
-def init(p=None, elf=None, _context=None, _args=None, _globals=None):
-
+def init(p=None, elf=None, _context=None, _args=None):
+    
     def do_check(v, t):
         assert(isinstance(p, tube))
 
@@ -29,6 +29,3 @@ def init(p=None, elf=None, _context=None, _args=None, _globals=None):
         do_check(_args, type(args))
         q_globals['args'] = _args
 
-    if _globals:
-        do_check(_globals, type(globals))
-        q_globals['globals'] = _globals
