@@ -42,13 +42,17 @@ def happy(name, value):
     log.success('%s: %s' % (name, hex(value)))
 '''
 
-def bc(addr, c=True):
+def bc(*addr_ls):
     """
         break and continue
     """
-    assert(type(addr) == int)
-    cmd = 'b *%s\n' % hex(addr)
-    cmd += 'c\n' if c else ''
+    cmd = ''
+    for addr in addr_ls:
+        if isinstance(addr, int):
+            cmd += 'b *%s\n' % hex(addr)
+        elif isinstance(addr, str):
+            cmd += 'bcall %s\n' % addr
+    cmd += 'c\n'
     gogogo(cmd)
 
 '''
