@@ -33,12 +33,14 @@ def gogogo(cmd=''):
     if not args.REMOTE:
         gdb.attach(p, cmd)
 
+'''
 def happy(name, value):
     """
         print variable's value with good format
     """
     assert(type(value) == int)
     log.success('%s: %s' % (name, hex(value)))
+'''
 
 def bc(addr, c=True):
     """
