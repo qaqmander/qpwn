@@ -6,3 +6,4 @@ if [[ $# < 1 ]]; then
 fi
 
 echo $1 >/proc/sys/kernel/randomize_va_space
+echo $1
