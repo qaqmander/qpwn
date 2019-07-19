@@ -116,7 +116,7 @@ class IO_FILE_plus_struct(dict):
         for item_offset in sorted(self.item_offset):
             if len(fake_file) < item_offset:
                 fake_file += '\x00' * (item_offset - len(fake_file))
-            fake_file += pack(self[_IO_FILE_plus[self.arch][item_offset]])
+            fake_file = fake_file[:item_offset] + pack(self[_IO_FILE_plus[self.arch][item_offset]])
         fake_file += '\x00' * (self.size - len(fake_file))
         return fake_file
 
