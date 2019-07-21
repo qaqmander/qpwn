@@ -33,15 +33,6 @@ def gogogo(cmd=''):
     if not args.REMOTE:
         gdb.attach(p, cmd)
 
-'''
-def happy(name, value):
-    """
-        print variable's value with good format
-    """
-    assert(type(value) == int)
-    log.success('%s: %s' % (name, hex(value)))
-'''
-
 def bc(*addr_ls):
     """
         break and continue
@@ -54,6 +45,56 @@ def bc(*addr_ls):
             cmd += 'bcall %s\n' % addr
     cmd += 'c\n'
     gogogo(cmd)
+
+def gen(ls):
+    """
+        more convenient func to replace 'pwn.flat'
+        item: num => x -> p64(x) or p32(x)
+              str => x -> x
+              tuple => (x, y) -> num => p64(x) * y or p32(x) * y
+                                 str => x * y
+              list => [x, y='\x00'] -> payload = payload.ljust(x, y='\x00');
+    """
+    pack = p64 if q_globals['context'].arch == 'amd64' else p32
+    payload = ''
+    for item in ls:
+        if isinstance(item, int):
+            payload += pack(item)
+        elif isinstance(item, str):
+            payload += item
+        elif isinstance(item, tuple):
+            assert(len(item) == 2)
+            assert(isinstance(item[1], int))
+            if isinstance(item[0], int):
+                payload += pack(item[0]) * item[1]
+            elif isinstance(item[0], str):
+                payload += item[0] * item[1]
+            else:
+                log.fail('gen: fail -- %s' % item.__str__())
+                exit(-1)
+        elif isinstance(item, list):
+            assert(len(item) in (1, 2))
+            if len(item) == 1:
+                length = item[0]
+                char = '\x00'
+            else:
+                length, char = item
+            assert(isinstance(length, int))
+            if len(payload) > length:
+                log.fail('gen: longer than -- %s' % item.__str__())
+                exit(-1)
+            else:
+                payload = payload.ljust(length, char)
+    return payload
+                
+'''
+def happy(name, value):
+    """
+        print variable's value with good format
+    """
+    assert(type(value) == int)
+    log.success('%s: %s' % (name, hex(value)))
+'''
 
 '''
 def set_aslr_level(level):
