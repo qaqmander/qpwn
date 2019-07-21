@@ -8,15 +8,18 @@ context.terminal = ['tmux', 'splitw', '-h']
 
 if args.INFO:
     context.log_level = 'info'
-
+    
+DEBUG = not args.REMOTE and not args.TEST
 if args.REMOTE:
     p = remote('127.0.0.1', 8888)
-    elf = ELF('./pwn')
-    #libc = ELF('./libc.so.6')
+    libc = ELF('./libc.so.6')
+elif args.TEST:
+    p = process('./pwn', env={'LD_PRELOAD': './libc.so.6'})
+    libc = ELF('./libc.so.6')
 else:
     p = process('./pwn')
-    elf = ELF('./pwn')
-    #libc = elf.libc
+    libc = ELF('./libc-2.xx.so')
+elf = ELF('./pwn')
 init(p, elf, context, args)
 make_alias(p)
 
