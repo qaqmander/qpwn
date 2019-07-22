@@ -7,6 +7,8 @@
 from pwn import log, p32, p64
 from init import q_globals
 
+# libc.sym['_IO_str_jumps'] = libc.sym['_IO_file_jumps'] + 0xc0
+
 _IO_FILE_plus_size = {
     'i386': 0x98,
     'amd64': 0xe0
